@@ -14,31 +14,57 @@ public class Main {
     public static void main(String[] args) {
         // write your code here
 
-        String reddit = "https://www.reddit.com/.json";
-        try {
-            URL url = new URL(reddit);
-            URLConnection con = url.openConnection();
-                InputStream in = con.getInputStream();
-        } catch (MalformedURLException e) {
-            System.out.println("Bad url");
-        } catch (IOException e) {
-            System.out.println("Please connect to the internet");
-        } catch (Exception e) {
-            writeToFile();
-        }
-
-
-    }
-
-
-    public static void writeToFile() {
-        try {
-            FileWriter writer = new FileWriter("1.txt");
-            writer.write("Hello, Java");
+        FileWriter writer = null;
+        try{
+            writer = new FileWriter("1.txt",true);
+            writer.write("Hello , Java");//security problem -> IO fails
             writer.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        catch (IOException e){
+            e.printStackTrace();
+            //show animation for unknown error
+        }
+        finally {
+            if (writer!=null){
+                try {
+                    writer.close();
+                }
+                catch (IOException el){
+                    el.printStackTrace();
+                }
+
+            }
+        }
+        //code that tries to read the file.....
+
+
+
+
+
+//        String reddit = "https://www.reddit.com/.json";
+//        try {
+//            URL url = new URL(reddit);
+//            URLConnection con = url.openConnection();
+//                InputStream in = con.getInputStream();
+//        } catch (MalformedURLException e) {
+//            System.out.println("Bad url");
+//        } catch (IOException e) {
+//            System.out.println("Please connect to the internet");
+//        } catch (Exception e) {
+//            writeToFile();
+//        }
+
+
+
+
+//    public static void writeToFile() {
+//        try {
+//            FileWriter writer = new FileWriter("1.txt");
+//            writer.write("Hello, Java");
+//            writer.flush();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
 
 //        try {
